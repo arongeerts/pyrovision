@@ -13,6 +13,16 @@
 ```  
 Infrastructure as Code as a RESTful service, powered by Terraform.  
   
+## Overview
+
+### Create Terraform stacks over a REST API, in a managed way.
+
+![](docs/img/rest_example.gif)
+
+### See and manage your stacks in the UI
+
+![](docs/img/screenshot_ui.png)
+
 ## Features  
   
 ### Managed Infrastructure as code  
@@ -34,6 +44,12 @@ your application and its infrastructure more easily. You will also be able to ge
 create intuitive wrappers for your development teams around the core product or even apply automated checks   
 on planned changes before actually committing them.  
   
+### React to Infrastructure changes in your environment using events
+
+**Pyrovision** can be integrated with event services, so that other applications 
+can respond to changes in your environment. The current implementation supports AWS SNS, but can be extended with other
+event services, such as Kafka, Queues or EventBridge.
+
 ## Get started  
   
 This repository holds a docker-compose file that can be used to set up   
