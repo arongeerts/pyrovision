@@ -15,7 +15,7 @@ Infrastructure as Code as a RESTful service, powered by Terraform.
 
 ## :mag: Overview
 
-> :warning: PyroVision is still in a development state. Feel free to play around and give feeedback!
+> :warning: PyroVision is still in a development state. Feel free to play around and give feedback!
 
 ### :satellite: Create Terraform stacks over a REST API, in a managed way.
 
@@ -99,7 +99,7 @@ notification:
   sns:
     topics:
       stack_updated: "arn:aws:sns:us-east-1:000000000000:StackUpdated"
-      stack_deleted: "arn:aws:sns:us-east-1:000000000000:StackDeleted"  # Topics are created in us-east-1
+      stack_deleted: "arn:aws:sns:us-east-1:000000000000:StackDeleted"
     region: eu-west-1
     endpoint_url: "http://localstack:4566"
     aws_access_key_id: foo
