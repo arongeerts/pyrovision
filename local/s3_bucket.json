@@ -1,0 +1,29 @@
+{
+	"id": "s3-bucket-stack",
+	"spec": {
+	  "provider": {
+	    "aws": {
+	      "alias": "local",
+	      "region": "eu-west-1",
+	      "access_key": "foo",
+		  "secret_key": "bar",
+		  "s3_force_path_style": true,
+		  "skip_credentials_validation": true,
+		  "skip_metadata_api_check": true,
+		  "skip_requesting_account_id": true,
+	      "endpoints": {
+	        "s3": "http://localstack:4566"
+	      }
+	    }
+	  },
+	  "resource": {
+	    "aws_s3_bucket": {
+	      "test-bucket": {
+	        "bucket": "test-bucket",
+	        "acl": "private",
+	        "provider": "aws.local"
+	      }
+	    }
+	  }
+	}
+}

@@ -1,0 +1,28 @@
+# Stack Store backend
+stackstore:
+  implementation: pyrovision.base.stackstore.dynamodb.DynamoDBStackStore
+  dynamodb:
+    table: "pyrovision-table"
+    partition_key: partition_key
+    region: eu-west-1
+    endpoint_url: "http://localstack:4566"
+    aws_access_key_id: foo
+    aws_secret_access_key: bar
+
+
+# Notification backend
+notification:
+  implementation: pyrovision.base.notification.sns.SNSNotifier
+  sns:
+    topics:
+      stack_updated: "arn:aws:sns:us-east-1:000000000000:StackUpdated"
+      stack_deleted: "arn:aws:sns:us-east-1:000000000000:StackDeleted"  # Topics are created in us-east-1
+    region: eu-west-1
+    endpoint_url: "http://localstack:4566"
+    aws_access_key_id: foo
+    aws_secret_access_key: bar
+
+
+# Terraform client implementation
+terraform:
+  client: pyrovision.base.terraform.local.LocalTerraformClient

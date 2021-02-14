@@ -1,0 +1,28 @@
+version: '2.1'
+
+services:
+  localstack:
+    container_name: "localstack"
+    image: "localstack/localstack:0.12.6"
+    ports:
+      - "4566:4566"
+      - "4571:4571"
+    environment:
+      - SERVICES=dynamodb,s3,sns
+  pyrovision-api:
+    container_name: "pyrovision-api"
+    build: .
+    ports:
+      - "8080:8080"
+  init-local:
+    container_name: "init"
+    build: local
+    depends_on: [localstack]
+  ui:
+    container_name: "ui"
+    build:
+      context: ui/pyro-web
+      args:
+       - API_URL=http://localhost:8080
+    ports:
+      - "5000:80"
