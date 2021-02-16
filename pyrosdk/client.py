@@ -4,7 +4,7 @@ import requests
 
 from pyrosdk.exceptions import PyroVisionException
 from pyrosdk.model.stack import PyroVisionStack
-from pyrovision.common.model.plan import Plan
+from pyrocore.model.plan import Plan
 
 
 class PyroVisionClient:

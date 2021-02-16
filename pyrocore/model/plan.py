@@ -2,7 +2,7 @@ from typing import Dict, List, Any, Optional
 
 from pydantic import BaseModel, Field
 
-from pyrovision.common.model.resource import Resource
+from pyrocore.model.resource import Resource
 
 
 class _RootModule(BaseModel):

@@ -1,5 +1,5 @@
 from pyrovision.api.notification.service import Notifier
-from pyrovision.common.model.events.stack import StackDeletedEvent, StackUpdatedEvent
+from pyrocore.model.events.stack import StackDeletedEvent, StackUpdatedEvent
 
 
 class Disabled(Notifier):

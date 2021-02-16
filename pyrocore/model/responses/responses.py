@@ -3,8 +3,8 @@ from typing import List, Optional
 
 from pydantic import BaseModel
 
-from pyrovision.common.model.plan import Plan
-from pyrovision.common.model.stack import Stack
+from pyrocore.model.plan import Plan
+from pyrocore.model.stack import Stack
 
 
 class Status(str, Enum):
@@ -23,5 +23,4 @@ class ListStacksResponse(BaseModel):
 
 
 class CreateStackResponse(BaseModel):
-    plan: Plan
     stack: Stack

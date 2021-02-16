@@ -1,3 +1,4 @@
+from pyrocore.model.outputs import Output
 from pyrosdk.client import PyroVisionClient
 
 from pyrosdk.model.stack import PyroVisionStack
@@ -34,6 +35,10 @@ def create_stack():
         ):
             raise Exception("You are creating a non-private bucket!")
 
+    # Set the outputs
+    stack.with_output("arn", Output(value="${aws_s3_bucket.test-bucket-3.arn}"))
+
+    print(stack.json())
     # Deploy
     client.deploy(stack)
 
