@@ -8,8 +8,8 @@ from dynamodb_json import json_util as dynamo_json
 from pyrovision.api.config import config
 from pyrovision.api.exceptions import StackNotFoundException, MissingConfigException
 from pyrovision.api.store.stacks import StackStore
-from pyrovision.common.model.responses.responses import ListStacksResponse
-from pyrovision.common.model.stack import Stack
+from pyrocore.model.responses.responses import ListStacksResponse
+from pyrocore.model.stack import Stack
 
 CONFIG_TABLE = "stackstore.dynamodb.table"
 CONFIG_PART_KEY = "stackstore.dynamodb.partition_key"

@@ -5,7 +5,7 @@ import boto3
 from pyrovision.api.config import config
 from pyrovision.api.exceptions import MissingConfigException
 from pyrovision.api.notification.service import Notifier
-from pyrovision.common.model.events.stack import StackDeletedEvent, StackUpdatedEvent
+from pyrocore.model.events.stack import StackDeletedEvent, StackUpdatedEvent
 
 CONFIG_UPDATED_TOPIC = "notification.sns.topics.stack_updated"
 CONFIG_DELETED_TOPIC = "notification.sns.topics.stack_deleted"

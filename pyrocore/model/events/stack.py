@@ -1,7 +1,7 @@
 from pydantic.main import BaseModel
 
-from pyrovision.common.model.events.base import Event
-from pyrovision.common.model.stack import Stack
+from pyrocore.model.events.base import Event
+from pyrocore.model.stack import Stack
 
 
 class _StackUpdated(BaseModel):

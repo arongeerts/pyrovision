@@ -8,7 +8,7 @@ from starlette.responses import JSONResponse
 
 from pyrovision.api.controller import Controller
 from pyrovision.api.exceptions import StackNotFoundException, TerraformOperationFailed
-from pyrovision.common.model.stack import Stack
+from pyrocore.model.stack import Stack
 from pyrovision.api.terraform.client import TerraformClient
 
 app = FastAPI()

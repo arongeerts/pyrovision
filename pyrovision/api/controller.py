@@ -2,14 +2,14 @@ from typing import ClassVar
 
 from pyrovision.api.exceptions import StackNotFoundException
 from pyrovision.api.notification.service import Notifier
-from pyrovision.common.model.events.stack import StackDeletedEvent, StackUpdatedEvent
-from pyrovision.common.model.plan import Plan
-from pyrovision.common.model.responses.responses import (
+from pyrocore.model.events.stack import StackDeletedEvent, StackUpdatedEvent
+from pyrocore.model.plan import Plan
+from pyrocore.model.responses.responses import (
     ListStacksResponse,
     CreateStackResponse,
 )
-from pyrovision.common.model.state import State
-from pyrovision.common.model.stack import Stack
+from pyrocore.model.state import State
+from pyrocore.model.stack import Stack
 from pyrovision.api.store.stacks import StackStore
 from pyrovision.api.terraform.client import TerraformClient as TerraformClientABC
 
@@ -51,11 +51,12 @@ class Controller:
 
     async def create_stack(self, stack: Stack) -> CreateStackResponse:
         tf = self.TerraformClient(workspace=stack.id)
-        plan = tf.apply(stack)
+        outputs = tf.apply(stack)
+        stack.outputs = outputs
         self.store.save(stack)
 
         # Push event
         await self.notifier.push_stack_updated_event(
             StackUpdatedEvent.from_payload({"stack": stack})
         )
-        return CreateStackResponse(plan=plan, stack=stack)
+        return CreateStackResponse(stack=stack)

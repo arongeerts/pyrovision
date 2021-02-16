@@ -2,7 +2,7 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pyrovision.common.model.resource import Resource
+from pyrocore.model.resource import Resource
 
 
 class _RootModule(BaseModel):

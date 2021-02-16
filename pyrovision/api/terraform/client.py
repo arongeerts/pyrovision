@@ -2,11 +2,12 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import ClassVar
 
+from pyrocore.model.outputs import Outputs
 from pyrovision.api.config import config
 from pyrovision.api.utils import import_class
-from pyrovision.common.model.plan import Plan
-from pyrovision.common.model.stack import Stack
-from pyrovision.common.model.state import State
+from pyrocore.model.plan import Plan
+from pyrocore.model.stack import Stack
+from pyrocore.model.state import State
 
 
 CONFIG_TERRAFORM_CLIENT = "terraform.client"
@@ -17,7 +18,7 @@ class TerraformClient(ABC):
         self.workspace = workspace
 
     @abstractmethod
-    def apply(self, stack: Stack) -> Plan:
+    def apply(self, stack: Stack) -> Outputs:
         raise NotImplementedError()
 
     @abstractmethod
@@ -30,6 +31,10 @@ class TerraformClient(ABC):
 
     @abstractmethod
     def destroy(self, stack: Stack) -> Plan:
+        raise NotImplementedError()
+
+    @abstractmethod
+    def get_outputs(self) -> Outputs:
         raise NotImplementedError()
 
     @classmethod

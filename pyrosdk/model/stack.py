@@ -1,5 +1,6 @@
 from typing import Any, Dict, List
 
+from pyrocore.model.outputs import Output
 from pyrosdk.model.provider import Provider
 from pyrosdk.model.resource import Resource
 
@@ -9,6 +10,7 @@ class PyroVisionStack:
         self.id = name
         self.resources: List[Resource] = []
         self.providers: List[Provider] = []
+        self.outputs: Dict[str, Dict[str, str]] = {}
 
     def json(self) -> Dict[str, Any]:
         d = {"resource": {}, "provider": {}}
@@ -21,6 +23,9 @@ class PyroVisionStack:
             }
         for p in self.providers:
             d["provider"].update(p.json())
+
+        if self.outputs:
+            d["output"] = self.outputs
         return {"id": self.id, "spec": d}
 
     def add_resource(self, resource: Resource):
@@ -28,3 +33,6 @@ class PyroVisionStack:
 
     def add_provider(self, provider: Provider):
         self.providers.append(provider)
+
+    def with_output(self, name: str, output: Output):
+        self.outputs.update({name: output.dict()})

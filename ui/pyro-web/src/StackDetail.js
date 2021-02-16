@@ -9,7 +9,7 @@ function StackDetail(props) {
     }
     return <Card >
         <Card.Header>{stack.id}</Card.Header>
-        <div style={{textAlign: "left"}}><pre>{JSON.stringify(stack, null, 2) }</pre></div>
+        <div style={{textAlign: "left"}}><pre>{JSON.stringify(stack.outputs, null, 2) }</pre></div>
     </Card>
 }
 

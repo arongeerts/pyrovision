@@ -3,11 +3,12 @@ import os
 import subprocess
 from typing import List
 
+from pyrocore.model.outputs import Outputs
 from pyrovision.api.exceptions import TerraformOperationFailed
 from pyrovision.api.terraform.client import TerraformClient
-from pyrovision.common.model.plan import Plan
-from pyrovision.common.model.stack import Stack
-from pyrovision.common.model.state import State
+from pyrocore.model.plan import Plan
+from pyrocore.model.stack import Stack
+from pyrocore.model.state import State
 
 
 class LocalTerraformClient(TerraformClient):
@@ -17,8 +18,8 @@ class LocalTerraformClient(TerraformClient):
         self.state_file = f"terraform.tfstate"
         self.__create_workspace()
 
-    def apply(self, stack: Stack) -> Plan:
-        p = self.plan(stack)
+    def apply(self, stack: Stack) -> Outputs:
+        self.plan(stack)
         self.run_cmd(
             [
                 f"terraform",
@@ -31,11 +32,21 @@ class LocalTerraformClient(TerraformClient):
                 f"{self.plan_file}",
             ]
         )
-        return p
+        outputs = self.get_outputs()
+        return outputs
 
     def plan(self, stack: Stack, destroy: bool = False) -> Plan:
+        d = stack.tf_json()
+
+        # Some fixes to get outputs right
+        outputs = d.get("output")
+        if outputs:
+            del d["output"]
+            with open(f"{self.workspace}/output.tf.json", "w") as f:
+                f.write(json.dumps({"output": outputs}))
+
         with open(f"{self.workspace}/main.tf.json", "w") as f:
-            f.write(json.dumps(stack.tf_json()))
+            f.write(json.dumps(d))
         terraform_plan = [
             f"terraform",
             f"-chdir={self.workspace}",
@@ -78,6 +89,15 @@ class LocalTerraformClient(TerraformClient):
         ]
         self.run_cmd(cmd)
         return p
+
+    def get_outputs(self) -> Outputs:
+        try:
+            outputs_json = self.run_cmd(
+                ["terraform", f"-chdir={self.workspace}", "output", "-json"]
+            )
+            return json.loads(outputs_json)
+        except subprocess.CalledProcessError:
+            return {}
 
     def __create_workspace(self):
         try:

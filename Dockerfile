@@ -18,5 +18,6 @@ COPY local/config.yaml /app/config.yaml
 ENV PYROVISION_CONFIG_FILE /app/config.yaml
 
 # Run app
+COPY ./pyrocore /app/pyrocore
 COPY ./pyrovision /app/pyrovision
 CMD ["uvicorn", "pyrovision.api.api:app", "--host", "0.0.0.0", "--port", "8080"]

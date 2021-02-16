@@ -4,9 +4,9 @@ from typing import Optional
 
 from pyrovision.api.exceptions import MissingConfigException
 from pyrovision.api.utils import init_class
-from pyrovision.common.model.responses.responses import ListStacksResponse
+from pyrocore.model.responses.responses import ListStacksResponse
 from pyrovision.api.config import config
-from pyrovision.common.model.stack import Stack
+from pyrocore.model.stack import Stack
 
 
 class StackStore(ABC):

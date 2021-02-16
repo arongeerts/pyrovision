@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from pyrovision.api.config import config
 from pyrovision.api.exceptions import MissingConfigException
 from pyrovision.api.utils import init_class
-from pyrovision.common.model.events.stack import StackUpdatedEvent, StackDeletedEvent
+from pyrocore.model.events.stack import StackUpdatedEvent, StackDeletedEvent
 
 DUMMY_NOTIFIER = "pyrovision.base.notification.none.Disabled"
 
